@@ -24,13 +24,22 @@ defmodule LinklyWeb.Router do
 
     get "/", SessionController, :new
     get "/login", SessionController, :new
+    post "/", SessionController, :login
     post "/login", SessionController, :login
   end
 
   # Escopo para rotas autenticadas
   scope "/", LinklyWeb do
     pipe_through [:browser, :auth]
-    get "/teste", PageController, :home
+
+    get "/home", LinkController, :index
+  end
+
+  scope "/in", LinklyWeb do
+    pipe_through :browser
+
+    # Rota para redirecionar o link encurtado
+    get "/:shortened_url", LinkController, :redirect_to_original
   end
 
   # Other scopes may use custom stacks.

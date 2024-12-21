@@ -10,6 +10,8 @@ defmodule Linkly.Users.User do
     field :password, :string, virtual: true
     field :password_hash, :string
 
+    has_many :links, Linkly.Links.Link, on_delete: :delete_all
+
     timestamps(type: :utc_datetime)
   end
 

@@ -1,0 +1,63 @@
+<.flash_group flash={@flash} />
+<div class="min-h-screen bg-gray-100 flex flex-col">
+  <div class="container mx-auto py-12 px-6">
+    <!-- Header -->
+    <div class="text-center mb-8">
+      <h1 class="text-4xl font-bold text-indigo-600">Links Cadastrados</h1>
+      <p class="text-gray-600 mt-2">Gerencie e visualize todos os seus links cadastrados aqui</p>
+    </div>
+
+    <!-- Add Link Button -->
+    <div class="flex justify-end mb-6">
+      <a
+        href="/links/new"
+        class="bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-2 px-4 rounded shadow-lg transition duration-200"
+      >
+        + Adicionar Link
+      </a>
+    </div>
+
+    <!-- Table -->
+    <div class="bg-white shadow rounded-lg overflow-hidden">
+      <table class="min-w-full table-auto border-collapse">
+        <thead class="bg-indigo-600 text-white">
+          <tr>
+            <th class="px-6 py-3 text-left text-sm font-semibold">Título</th>
+            <th class="px-6 py-3 text-left text-sm font-semibold">URL Original</th>
+            <th class="px-6 py-3 text-left text-sm font-semibold">URL Encurtada</th>
+            <th class="px-6 py-3 text-left text-sm font-semibold">Acessos</th>
+            <th class="px-6 py-3 text-center text-sm font-semibold">Ações</th>
+          </tr>
+        </thead>
+        <tbody>
+          <%= for link <- @links do %>
+            <tr class="border-b border-gray-200 hover:bg-gray-50">
+              <td class="px-6 py-4 text-sm font-medium text-gray-800"><%= link.title || "Sem título" %></td>
+              <td class="px-6 py-4 text-sm text-indigo-500 hover:underline">
+                <a href={link.url} target="_blank"><%= link.url %></a>
+              </td>
+              <td class="px-6 py-4 text-sm text-indigo-500 hover:underline">
+                <a href={Linkly.Links.Link.full_shortened_url(link)} target="_blank"><%= Linkly.Links.Link.full_shortened_url(link) %></a>
+              </td>
+              <td class="px-6 py-4 text-sm text-indigo-500 hover:underline">
+                <%= link.access_count || 0 %>
+              </td>
+              <td class="px-6 py-4 text-center">
+                <a href={~p"/links/#{link.id}/edit"} class="text-indigo-600 hover:underline font-semibold">Editar</a>
+                <span class="text-gray-400 mx-2">|</span>
+                <a href={~p"/links/#{link.id}/delete"} class="text-red-600 hover:underline font-semibold">Excluir</a>
+              </td>
+            </tr>
+          <% end %>
+          <!-- Caso não tenha links -->
+          <%= if Enum.empty?(@links) do %>
+            <tr>
+              <td colspan="3" class="text-center py-6 text-gray-600">Nenhum link cadastrado ainda.</td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+

@@ -11,6 +11,8 @@ config :linkly,
   ecto_repos: [Linkly.Repo],
   generators: [timestamp_type: :utc_datetime]
 
+config :linkly, base_url: "http://localhost:4000"
+
 # Configures the endpoint
 config :linkly, LinklyWeb.Endpoint,
   url: [host: "localhost"],
