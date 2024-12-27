@@ -1,9 +1,22 @@
 <.flash_group flash={@flash} />
 <div class="min-h-screen bg-gradient-to-r from-green-500 via-teal-500 to-blue-600 flex items-center justify-center">
   <div class="bg-white shadow-lg rounded-lg p-8 max-w-sm w-full">
-    <h2 class="text-2xl font-bold text-gray-800 text-center mb-6">Login</h2>
-    <.form for={@login} method="post" class="space-y-4">
+    <h2 class="text-2xl font-bold text-gray-800 text-center mb-6">Sign Up</h2>
+    <.form for={@signup} method="post" class="space-y-4">
       <input type="hidden" name="_csrf_token" value={get_csrf_token()} />
+
+      <!-- Name Input -->
+      <div>
+        <label for="email" class="block text-sm font-medium text-gray-700">Name</label>
+        <input
+          type="text"
+          name="name"
+          id="name"
+          required
+          placeholder="Enter a name"
+          class="w-full mt-1 px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-teal-500 focus:border-teal-500"
+        />
+      </div>
 
       <!-- Email Input -->
       <div>
@@ -14,7 +27,7 @@
           id="email"
           required
           placeholder="you@example.com"
-          class="w-full mt-1 px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+          class="w-full mt-1 px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-teal-500 focus:border-teal-500"
         />
       </div>
 
@@ -27,7 +40,7 @@
           id="password"
           required
           placeholder="••••••••"
-          class="w-full mt-1 px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+          class="w-full mt-1 px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-teal-500 focus:border-teal-500"
         />
       </div>
 
@@ -37,18 +50,18 @@
           type="submit"
           class="w-full px-4 py-2 text-white bg-teal-500 rounded-lg shadow-md hover:bg-teal-600 focus:outline-none focus:ring-2 focus:ring-teal-400 focus:ring-offset-2"
         >
-          Sign In
+          Sign Up
         </button>
       </div>
     </.form>
 
-    <!-- Sign Up Button -->
+    <!-- Back to Login -->
     <div class="mt-4 text-center">
       <a
-        href="/signup"
-        class="w-full inline-block px-4 py-2 text-black hover:text-white border border-teal-500 rounded-lg hover:bg-teal-500 focus:outline-none focus:ring-2 focus:ring-indigo-400 focus:ring-offset-2"
+        href="/login"
+        class="inline-block text-teal-500 hover:underline"
       >
-        Sign Up
+        Already have an account? Sign In
       </a>
     </div>
   </div>

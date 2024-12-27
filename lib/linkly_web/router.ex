@@ -24,6 +24,8 @@ defmodule LinklyWeb.Router do
 
     get "/", SessionController, :new
     get "/login", SessionController, :new
+    get "/signup", RegistrationController, :new
+    post "/signup", RegistrationController, :signup
     post "/", SessionController, :login
     post "/login", SessionController, :login
   end

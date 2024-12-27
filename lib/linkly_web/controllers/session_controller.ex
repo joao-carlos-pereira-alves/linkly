@@ -19,7 +19,7 @@ defmodule LinklyWeb.SessionController do
         |> put_flash(:info, "Login successful!")
         |> put_session(:user_id, user.id)
         |> put_session(:token, token)
-        |> redirect(to: ~p"/")
+        |> redirect(to: ~p"/home")
 
       {:error, _reason} ->
         conn
