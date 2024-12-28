@@ -3,12 +3,12 @@
 Linkly é um encurtador de links desenvolvido com Elixir e Phoenix, utilizando PostgreSQL como banco de dados, e com estilização feita em Tailwind CSS. O projeto permite que os usuários cadastrem links, visualizem os links registrados e acompanhem o número de cliques em cada link. Além disso, conta com um fluxo de cadastro/login de usuários, bem como funcionalidades de cadastro e remoção de links.
 
 <p align="center">
-  <img src="linkly_1.jpeg" alt="Imagem 1" width="49.5%" />
-  <img src="linkly_2.jpeg" alt="Imagem 2" width="49.5%" />
+  <img src="linkly_1.png" alt="Imagem 1" width="49.5%" />
+  <img src="linkly_2.png" alt="Imagem 2" width="49.5%" />
 </p>
 <p align="center">
-  <img src="linkly_3.jpeg" alt="Imagem 3" width="49.5%" />
-  <img src="linkly_4.jpeg" alt="Imagem 4" width="49.5%" />
+  <img src="linkly_3.png" alt="Imagem 3" width="49.5%" />
+  <img src="linkly_4.png" alt="Imagem 4" width="49.5%" />
 </p>
 
 ## Funcionalidades
