@@ -43,6 +43,7 @@ defmodule Linkly.Links.Link do
     |> validate_length(:title, min: 3)
     |> validate_length(:title, max: 256)
     |> validate_format(:url, ~r/^(http|https):\/\/[^\s]+$/)
+    |> unique_constraint(:links, name: :links_url_user_id_index)
   end
 
   defp generate_shortened_url do

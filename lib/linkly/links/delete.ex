@@ -4,9 +4,10 @@ defmodule Linkly.Links.Delete do
   alias Linkly.Links.Link
   alias Linkly.Repo
 
-  def call(params) do
-    params
-    |> Link.changeset()
-    |> Repo.insert()
+  def call(id) do
+    case Repo.get(Link, id) do
+      nil -> { :error, :not_found}
+      link -> Repo.delete(link)
+    end
   end
 end

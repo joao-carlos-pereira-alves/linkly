@@ -9,7 +9,49 @@ defmodule LinklyWeb.LinkController do
   def index(conn, _params) do
     user_id = conn.assigns[:user_id]
     links = Links.list_links_by_user(user_id)
-    render(conn, :links, layout: false, links: links)
+    render(conn, :links, layout: false, links: links, changeset: %{}, page: 1, total_pages: 4)
+  end
+
+  def create(conn, params) do
+    user_id = conn.assigns[:user_id]
+    params = Map.put(params, "user_id", user_id)
+
+    case Links.create(params) do
+      {:ok, link} ->
+        conn
+        |> put_flash(:info, "Link added successfully")
+        |> redirect(to: ~p"/home")
+
+      {:error, %{links: ["has already been taken"]}} ->
+        conn
+        |> put_flash(:error, "A URL já foi associada a este usuário!")
+        |> render(:links,
+          layout: false,
+          links: Links.list_links_by_user(user_id),
+          changeset: %{}
+        )
+
+      {:error, %Ecto.Changeset{} = changeset} ->
+        links = Links.list_links_by_user(user_id)
+
+        conn
+        |> put_flash(:error, "Unable to add link")
+        |> render(:links, layout: false, links: links, changeset: changeset)
+    end
+  end
+
+  def delete(conn, %{"id" => id}) do
+    case Links.delete(id) do
+      {:ok, _} ->
+        conn
+        |> put_flash(:info, "Link deleted successfully")
+        |> redirect(to: ~p"/home")
+
+      {:error, :not_found} ->
+        conn
+        |> put_flash(:error, "Link not found")
+        |> redirect(to: ~p"/home")
+    end
   end
 
   def redirect_to_original(conn, %{"shortened_url" => shortened_url}) do

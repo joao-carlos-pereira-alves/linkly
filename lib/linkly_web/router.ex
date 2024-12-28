@@ -35,6 +35,9 @@ defmodule LinklyWeb.Router do
     pipe_through [:browser, :auth]
 
     get "/home", LinkController, :index
+    get "/links", LinkController, :index
+    post "/links", LinkController, :create
+    delete "/links/:id", LinkController, :delete
   end
 
   scope "/in", LinklyWeb do
