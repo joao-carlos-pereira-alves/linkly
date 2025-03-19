@@ -9,3 +9,13 @@ services:
       POSTGRES_DB: linkly_dev
     ports:
       - "5432:5432"
+  app:
+    image: linkly/app
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    ports:
+      - "4000:4000"
+    depends_on:
+      - postgres
+    entrypoint: ["/bin/sh", "-c", "/app/entrypoint.sh"]

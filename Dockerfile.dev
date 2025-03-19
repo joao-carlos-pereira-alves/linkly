@@ -1,0 +1,16 @@
+FROM elixir:1.15-alpine
+
+RUN apk add --no-cache build-base git postgresql-dev inotify-tools
+
+WORKDIR /app
+
+COPY mix.exs mix.lock ./
+COPY config config
+
+RUN mix local.hex --force && \
+    mix local.rebar --force && \
+    mix deps.get
+
+COPY . .
+
+EXPOSE 4000
